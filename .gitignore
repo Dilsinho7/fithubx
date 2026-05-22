@@ -1,0 +1,34 @@
+# ==========================================
+# Dependências do Frontend (Node / React / Vite)
+# ==========================================
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# ==========================================
+# Arquivos do Backend (Python)
+# ==========================================
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ==========================================
+# Segurança: Variáveis de Ambiente
+# ==========================================
+.env
+.env.production
+.env.development
+
+# ==========================================
+# Banco de Dados Local e Arquivos do Sistema
+# ==========================================
+*.db
+*.sqlite3
+.DS_Store
+Thumbs.db
+.vscode/
