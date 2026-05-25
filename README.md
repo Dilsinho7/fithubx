@@ -8,6 +8,11 @@ O **FitHub** é uma aplicação web funcional projetada para o gerenciamento e e
 - **Frontend:** React.js (Vite)
 - **Infraestrutura & DevOps:** Docker, GitHub Actions
 
+## 👥 5. Membros da Squad
+Adilson Peddro Ferreira Cavalcanti Filho - 01751877;
+Alexsandro Souza do Nascimento - 01750424;
+Alex Johny Santos da Silva - 01124089;
+
 ## 📦 Como Rodar o Projeto via Docker
 
 Certifique-se de ter o Docker instalado em sua máquina.
