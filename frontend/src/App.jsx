@@ -1,45 +1,31 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react'
+import './App.css'
 
 function App() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState([])
 
   useEffect(() => {
-    // Aponta para a porta padrão do container backend
     fetch('http://localhost:8000/api/products')
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        print("Erro ao buscar produtos:", err);
-        setLoading(false);
-      });
-  }, []);
+      .then(response => response.json())
+      .then(data => setProducts(data))
+  }, [])
 
   return (
-    <div style={{ fontFamily: 'Arial, sans-serif', padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
-      <header style={{ borderBottom: '2px solid #333', paddingBottom: '10px', marginBottom: '20px' }}>
-        <h1 style={{ color: '#e63946' }}>FitHub 💪</h1>
-        <p>Acessórios de Alto Desempenho para o seu Treino</p>
-      </header>
-
-      {loading ? (
-        <p>Carregando produtos...</p>
-      ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-          {products.map((product) => (
-            <div key={product.id} style={{ border: '1px solid #ddd', padding: '15px', borderRadius: '8px', backgroundColor: '#f9f9f9' }}>
-              <span style={{ fontSize: '12px', color: '#666', textTransform: 'uppercase' }}>{product.category}</span>
-              <h3 style={{ margin: '5px 0' }}>{product.name}</h3>
-              <p style={{ fontWeight: 'bold', color: '#1d3557' }}>R$ {product.price.toFixed(2)}</p>
-            </div>
-          ))}
-        </div>
-      )}
+    <div className="catalog-container">
+      <h1>Vitrine FitHub 💪</h1>
+      <p>Equipamentos de alta performance para o seu treino.</p>
+      
+      <div className="product-grid">
+        {products.map(product => (
+          <div key={product.id} className="product-card">
+            <h2>{product.name}</h2>
+            <p>{product.description}</p>
+            <p className="product-price">R$ {product.price.toFixed(2)}</p>
+          </div>
+        ))}
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
