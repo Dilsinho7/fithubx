@@ -31,3 +31,13 @@
   font-size: 1.5rem;
   font-weight: bold;
 }
+
+.product-card h2 {
+  color: #2c3e50;
+  margin-top: 0;
+  font-size: 1.4rem;
+}
+
+.product-card p {
+  color: #555555; 
+}

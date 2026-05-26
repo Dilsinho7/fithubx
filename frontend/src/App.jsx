@@ -18,7 +18,7 @@ function App() {
       <div className="product-grid">
         {products.map(product => (
           <div key={product.id} className="product-card">
-            <h2>{product.name}</h2>
+            <h2 className='product-name'>{product.name}</h2>
             <p>{product.description}</p>
             <p className="product-price">R$ {product.price.toFixed(2)}</p>
           </div>

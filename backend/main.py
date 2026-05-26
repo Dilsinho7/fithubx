@@ -1,10 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-import os
 
-app = FastAPI(title="FitHub API", description="Backend do catálogo de acessórios fitness")
+app = FastAPI()
 
-# permite que o Frontend React acesse a API tranquilamente
+# Configuração do CORS para o Frontend conseguir conversar com o Backend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -13,25 +12,27 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# simulação de banco de dados de produtos fitness
-PRODUCTS = [
-    {"id": 1, "name": "Cinto Lombar de Couro", "price": 149.90, "category": "Musculação"},
-    {"id": 2, "name": "Faixa Elástica (Theraband)", "price": 45.00, "category": "Funcional"},
-    {"id": 3, "name": "Strap de Pegada Profissional", "price": 39.90, "category": "Musculação"},
-    {"id": 4, "name": "Corda de Pular de Alta Velocidade", "price": 59.90, "category": "Cardio"}
+# O "Banco de Dados" temporário
+products_db = [
+    {"id": 1, "name": "Cinto de Musculação", "description": "Proteção lombar para agachamentos.", "price": 120.00},
+    {"id": 2, "name": "Faixa de Joelho", "description": "Estabilidade para cargas altas.", "price": 85.50},
+    {"id": 3, "name": "Straps", "description": "Melhora a pegada no levantamento terra.", "price": 45.00},
 ]
 
 @app.get("/")
 def read_root():
     return {"status": "FitHub API rodando com sucesso!"}
 
+# Rota 1: Lista todos os produtos
 @app.get("/api/products")
 def get_products():
-    return PRODUCTS
+    return products_db
+
+# Rota 2: Busca um produto específico pelo ID
 @app.get("/api/products/{product_id}")
 def get_product_by_id(product_id: int):
     for product in products_db:
         if product["id"] == product_id:
             return product
-    # Retorna erro 404 se o produto não existir
+    # Se o loop terminar e não achar o ID, dispara erro 404
     raise HTTPException(status_code=404, detail="Produto não encontrado no FitHub")
