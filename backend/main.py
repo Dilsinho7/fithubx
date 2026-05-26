@@ -28,3 +28,10 @@ def read_root():
 @app.get("/api/products")
 def get_products():
     return PRODUCTS
+@app.get("/api/products/{product_id}")
+def get_product_by_id(product_id: int):
+    for product in products_db:
+        if product["id"] == product_id:
+            return product
+    # Retorna erro 404 se o produto não existir
+    raise HTTPException(status_code=404, detail="Produto não encontrado no FitHub")
